@@ -91,7 +91,7 @@ public class BestScrabbleWord{
         
      public static void main(String []args){
         
-		Scrabble object = new Scrabble(" tefiva");
+		Scrabble object = new Scrabble(" cetone");
 		System.out.println(object.findBestWord());
      }
 }

@@ -20,7 +20,7 @@ class Scrabble{
 		return count;	
 	 }	 
 	 boolean isValid(String word){
-		 if(word.length() == 1 || word.length() > 7){
+		 if(word.length() > 7){
 			 return false;
 		 }
 		 int countOfLettersInWord[];

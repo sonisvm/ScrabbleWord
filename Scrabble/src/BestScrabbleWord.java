@@ -61,7 +61,7 @@ class Scrabble{
 		String bestWord = "";
 		try {
 		   
-			fileReader = new BufferedReader(new FileReader("C:/Users/test/Documents/Scrabble/src/sowpods.txt"));
+			fileReader = new BufferedReader(new FileReader("C:/Users/test/Documents/GitHub/ScrabbleWord/Scrabble/src/sowpods.txt"));
 			while ( (nextWord = fileReader.readLine()) != null ) {
 				int countOfLettersInWord[];
 				countOfLettersInWord = countLetters(nextWord);

@@ -43,6 +43,26 @@ public class TestScrabble {
 		assertArrayEquals(score2,object.countLetters("ace one"));
 	}
 	
+	@Test
+	public void testIsValid(){
+		object = new Scrabble("acetone");
+		int[] score = {1,0,1,0,2,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0};
+		assertEquals(true,object.isValid("acetone", score));
+		int[] score2 = {0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0};
+		assertEquals(true,object.isValid("note", score2));
+		object = new Scrabble("acetne");
+		int[] score3 = {0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0};
+		assertEquals(false,object.isValid("tonne", score3));
+	}
+	
+	@Test
+	public void testCalculateScore(){
+		object = new Scrabble("acetone");
+		int[] score = {1,0,1,0,2,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0};
+		assertEquals(9,object.calculateScore(score));
+		
+	}
+	
     public static void main(String args[]){
     	
     	JUnitCore.main("TestScrabble");

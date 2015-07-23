@@ -13,32 +13,43 @@ class Scrabble{
 		 countOfLettersGiven = countLetters(inputLetters);
 	 }
 	 int[] countLetters(String word){
-		 int count[] = new int[26];
+		 int count[] = new int[27];
 		 for(int i=0;i<word.length();i++){
-			 count[Character.toLowerCase(word.charAt(i)) - 'a']++;
+			 if(Character.isWhitespace(word.charAt(i))){
+				 count[26]++;
+			 }	
+			 else{
+				 count[Character.toLowerCase(word.charAt(i)) - 'a']++;
+			 }
+			 
+			 
 		 }	
 		return count;	
 	 }	 
-	 boolean isValid(String word){
+	 boolean isValid(String word, int countOfLettersInWord[]){
 		 if(word.length() > 7){
 			 return false;
 		 }
-		 int countOfLettersInWord[];
-		 countOfLettersInWord = countLetters(word);
-		 
+		 int numOfDifferences = 0;
 		 for(int i=0;i < 26;i++){
 			 if(countOfLettersInWord[i] > countOfLettersGiven[i]){
-				 return false;
+				 numOfDifferences += countOfLettersInWord[i] - countOfLettersGiven[i];
 			 }
 			 
 		 }
+		 
+		 if(numOfDifferences > countOfLettersGiven[26]){
+			 return false;
+		 }	 
 		 return true;
 	 }	 
-	 int calculateScore(String word){
+	 int calculateScore(int countOfLettersInWord[]){
             
             int wordScore = 0;
-            for(int i=0;i < word.length();i++){
-                wordScore += score[(Character.toLowerCase(word.charAt(i)) - 'a')];  
+            for(int i=0;i < countOfLettersInWord.length - 1;i++){
+				if (countOfLettersInWord[i] <= countOfLettersGiven[i]){
+					wordScore += score[i] * countOfLettersInWord[i];  
+				}
             }
             return wordScore;
         }
@@ -52,13 +63,18 @@ class Scrabble{
 		   
 			fileReader = new BufferedReader(new FileReader("sowpods.txt"));
 			while ( (nextWord = fileReader.readLine()) != null ) {
-				
-				if(isValid(nextWord)){
-					wordScore = calculateScore(nextWord);
+				int countOfLettersInWord[];
+				countOfLettersInWord = countLetters(nextWord);
+					
+				if(isValid(nextWord, countOfLettersInWord)){
+					wordScore = calculateScore(countOfLettersInWord);
 					if (wordScore > maxScore){
 						maxScore = wordScore;
-						bestWord = bestWord + " " + nextWord;
+						bestWord = nextWord;
 					}
+					else if(wordScore == maxScore){
+						bestWord = bestWord + " " + nextWord;
+					}	
 				}	
 				
 				
@@ -75,7 +91,7 @@ public class BestScrabbleWord{
         
      public static void main(String []args){
         
-		Scrabble object = new Scrabble("dtefiva");
+		Scrabble object = new Scrabble(" tefiva");
 		System.out.println(object.findBestWord());
      }
 }

@@ -57,7 +57,7 @@ class Scrabble{
 					wordScore = calculateScore(nextWord);
 					if (wordScore > maxScore){
 						maxScore = wordScore;
-						bestWord = nextWord;
+						bestWord = bestWord + " " + nextWord;
 					}
 				}	
 				

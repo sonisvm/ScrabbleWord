@@ -1,16 +1,53 @@
 import java.io.*;
 import java.util.*;
 
+public class BestScrabbleWord{
+        
+     public static void main(String []args){
+        
+		Scrabble object = new Scrabble(args[0]);
+		System.out.println(object.findBestWord());
+     }
+}
+
 class Scrabble{
 	 int score[] ;
 	 
 	 int countOfLettersGiven[];
-	 
+	 HashMap<String, String> anagramsMap;
 	 
 	 Scrabble(String inputLetters){
 		 score = new int[]{1,3,3,2,1,4,2,4,1,8,10,1,2,1,1,3,8,1,1,1,1,4,10,10,10,10};
-		
+		 
+		 anagramsMap = new HashMap<String, String>();
+		 try {
+			   
+				fileReader = new BufferedReader(new FileReader("sowpods.txt"));
+				while ( (nextWord = fileReader.readLine()) != null ) {
+					String sortedNextWord = sort(nextWord);
+					String anagramsOfNextWord = anagramsMap.get(sortedNextWord);
+					
+					if (anagramsOfNextWord !=null) {
+						anagramsOfNextWord = anagramsOfNextWord + " "+nextWord;
+					}
+					else {
+						anagramsOfNextWord = nextWord;
+					}
+					anagramsMap.put(sortedNextWord, anagramsOfNextWord);
+				}
+			} 
+			catch (Exception exp) {
+				System.err.println(exp.getMessage());
+			}
+		 
 		 countOfLettersGiven = countLetters(inputLetters);
+	 }
+	 
+	 String sort(String word)
+	 {
+		 char[] characterInWord = word.toCharArray();
+		 Arrays.sort(characterInWord);
+		 return new String(characterInWord);
 	 }
 	 int[] countLetters(String word){
 		 int count[] = new int[27];
@@ -87,12 +124,3 @@ class Scrabble{
 		return bestWord + " " + maxScore;
 	 }	 
 }	
-public class BestScrabbleWord{
-        
-     public static void main(String []args){
-        
-		Scrabble object = new Scrabble(" cetone");
-		System.out.println(object.findBestWord());
-     }
-}
-

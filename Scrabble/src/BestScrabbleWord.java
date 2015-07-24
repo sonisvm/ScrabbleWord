@@ -4,7 +4,7 @@ public class BestScrabbleWord {
 
 	public static void main(String[] args) {
 			        
-			Scrabble object = new Scrabble("ONE CET");
+			Scrabble object = new Scrabble(args[0]);
 			System.out.println(object.findBestWord());
 	     }
 

@@ -1,5 +1,14 @@
 import java.io.*;
 import java.util.*;
+public class BestScrabbleWord {
+
+	public static void main(String[] args) {
+			        
+			Scrabble object = new Scrabble("ONE CET");
+			System.out.println(object.findBestWord());
+	     }
+
+	}
 
 class Scrabble{
 	 int score[] ;
@@ -88,13 +97,4 @@ class Scrabble{
             return wordScore;
         }
 	 }
-public class BestScrabbleWord {
-
-	public static void main(String[] args) {
-			        
-			Scrabble object = new Scrabble("ONE CET");
-			System.out.println(object.findBestWord());
-	     }
-
-	}
 
